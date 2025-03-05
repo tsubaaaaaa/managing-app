@@ -1,0 +1,22 @@
+databases:
+  - name: managing-postgresql
+    databaseName: managing-postgresql
+    user: managing_postgresql_user
+    region: singapore
+
+services:
+  - type: web
+    name: managing-app
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: postgresql://managing_postgresql_user:YwKrXP9T6ohpv7zwYzJWbK85z6Sbuzjv@dpg-cv44ghrqf0us73b5gmg0-a/managing_postgresql
+        fromDatabase:
+          name: managing-postgresql
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
