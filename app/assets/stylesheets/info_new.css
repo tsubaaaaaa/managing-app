@@ -1,0 +1,94 @@
+.info-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+.qrcode{
+    margin: 0 auto;
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.info-form-title {
+    font-size: medium;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.info-form{
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.info-form-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* 項目間の間隔 */
+}
+
+
+.field select,
+.field input[type="date"],
+.field input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: medium;
+    text-align: center;
+}
+
+.field input[type="text"]:focus,
+.field select:focus,
+.field input[type="date"]:focus {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: medium;
+    text-align: center;
+}
+
+.textbox {
+    min-width: 35%;
+    min-height: 15%;
+    border: 2px solid #3333337a;
+    border-radius: 5px;
+    padding: 15px; /* 内部余白 */
+    margin: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+  
+.label-box {
+    position: absolute;
+    top: -12px;
+    left: 5px;
+    background-color: #fff;
+    color: #3333337a;
+    font-size: small;
+    font-weight: bold;
+    padding: 3px 5px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+  
+.btn-green {
+    background-color: #28a745; /* 緑 */
+}
+  
+.btn-red {
+    background-color: #dc3545; /* 赤 */
+}

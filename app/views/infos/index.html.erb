@@ -1,0 +1,62 @@
+
+
+<div class="search-container">
+  <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
+    <%= text_field_tag :search, params[:search]%>
+    <%= submit_tag "検索" %>
+  <% end %>
+
+  <div class="sort-container">
+    <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
+      
+      <!--日付検索用の値を保持 -->
+      <%= hidden_field_tag :start_date, params[:start_date] %>
+      <%= hidden_field_tag :end_date, params[:end_date] %>
+
+      <%= select_tag :sort, options_for_select(
+        [
+          ["", ""],
+          ["捕獲日の古い順", "hunt_asc"],
+          ["捕獲日の新しい順", "hunt_desc"],
+          ["加工日の古い順", "processed_asc"], 
+          ["加工日の新しい順", "processed_desc"],
+          ["識別番号の昇順", "id_desc"],
+          ["識別番号の降順", "id_asc"]
+        ],
+        params[:sort]
+      ) %>
+      <%= submit_tag "並び替え" %>
+    <% end %>
+  </div>
+  
+</div>
+
+<div class="detail-search-container">
+  <div class="date-serach- container">
+    <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
+      <%= date_field_tag :start_date, params[:start_date] %>
+      <%= date_field_tag :end_date, params[:end_date] %>
+      <%= submit_tag "日付検索" %>
+    <% end %>
+  </div>
+</div>
+
+<%# infos-cintainerをクリックしてinfoの詳細ページに遷移 %>
+
+<div class="infos-container" >
+  <% @infos.each do |info| %>
+    <div class="info" onclick="location.href='<%= info_path(info.id) %>'" 
+    style = "cursor:pointer;">
+
+    <p><strong>識別番号:</strong> <%= info.identifier %></p>
+    <p><strong>捕獲者:</strong> <%= info.hunter %></p>
+    <p><strong>捕獲日:</strong> <%= info.Hunteddate %></p>
+
+    <%#= link_to "詳細へ", info_path(info.id) %>
+    </div>
+  <% end %>
+</div>
+
+<%# ページネーション %>
+<%= page_entries_info @infos %>
+<%= paginate @infos %>

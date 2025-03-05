@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ManagingApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <header>
+      <h3><%= link_to "管理アプリ（仮）", root_path %></h3>
+      <div class="header-list">
+        <ul>
+          <li><%= link_to "新規投稿ページへ", infos_new_path %></li>
+        </ul>
+        <ul>
+          <%# カメラを起動する %>
+        </ul>
+        
+      </div>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+  </body>
+</html>

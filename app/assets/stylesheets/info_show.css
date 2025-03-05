@@ -1,0 +1,67 @@
+.title{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 行の間隔 */
+  padding: 20px;
+}
+
+.qrcode{
+    margin: 0 auto;
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.info-title {
+  font-size: medium;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 5%;
+}
+
+.info-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* 項目間の間隔 */
+}
+
+.textbox {
+  max-width: 35%;
+  min-height: 15%;
+  border: 2px solid #3333337a;
+  border-radius: 5px;
+  padding: 15px; /* 内部余白 */
+  margin: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.label-box {
+  position: absolute;
+  top: -12px;
+  left: 5px;
+  background-color: #fff;
+  color: #3333337a;
+  font-size: small;
+  font-weight: bold;
+  padding: 3px 5px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.btn-blue{
+  background-color: rgb(89, 0, 255);
+}

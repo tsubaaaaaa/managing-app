@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>個体詳細</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'info_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>
+
+<div class="title">
+  <h1>個体詳細</h1>
+</div>
+
+<div class="info-container">
+  <%# qrコードをクリックして新しいタブで開く %>
+  
+  <div class="qrcode">
+    <%= image_tag qrcode("/infos/read_only/#{@info[:id]}") %>
+  </div>
+
+  <div class="each-info">
+    <div class="info-title">基本情報</div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">識別番号</div>
+        <%= @info.identifier %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲者</div> 
+        <%= @info.hunter %>
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲日</div>
+        <%= @info.Hunteddate %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲地</div>
+        <%= @info.location %>
+      </div>
+
+    </div>
+      <%# #Google Maps APIを使って地図を表示する %>
+      <%# <div id="map"></div> %>
+  </div>
+
+  <div class="each-info">
+    <div class="info-title">個体情報</div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲方法</div>
+        <%= @info.method %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">種類</div> 
+        <%= @info.species %>
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">推定月齢</div>
+        <%= @info.ages %> 
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">体重</div>
+        <%= @info.weight %> kg
+      </div>
+
+    </div>
+  </div>
+
+  <div class="each-info">
+    <div class="info-title">解体・加工情報</div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">解体日</div>
+        <%= @info.butchering_date %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">加工施設</div>
+        <%= @info.processed_location %>
+      </div>
+
+    </div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">加工日</div>
+        <%= @info.processed_date %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">加工者</div>
+        <%= @info.processed_by %>
+      </div>
+
+    </div>
+
+    <div class="button-container">
+      <div class="edit-button">
+        <%= link_to "編集", edit_info_path(@info.id), class:"btn btn-blue" %>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #map {
+      height: 200px;
+      width: 200px;
+    }
+  </style>
+
+</div>
+
+</body>
+
+<script>
+let map
+
+function initMap() {
+  geocoder = new google.maps.Geocoder();
+  
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
+    zoom: 14,
+  });
+
+  marker = new google.maps.Marker({
+    position: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
+    map: map
+  });
+}
+</script>
+
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer>
+</script>
+
+
+<!-- AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw -->

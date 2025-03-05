@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>新規</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'info_new', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>
+  <h1>新規</h1>
+  <%= link_to "一覧に戻る", root_path %>
+
+  <div class ="info-form-container">
+    <%= form_for @info do |info| %>
+    
+
+      <div class="info-form-title">基本情報</div>
+      <div class="info-form-row">
+      
+        <div class="textbox"> 
+          <div class="label-box">識別番号</div>
+            <div class="field">
+              <%= info.text_field :identifier, size: 20 %>
+            </div>
+        </div>
+
+        <div class="textbox"> 
+          <div class="label-box">捕獲者</div>
+          <div class="field">
+            <%= info.text_field :hunter, size: 20 %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-form-row">
+        <div class="textbox"> 
+          <div class="label-box">捕獲日</div>
+          <div class="field">
+            <%= info.date_field :Hunteddate, value:Date.today %> <br>
+          </div>
+        </div>
+
+        <div class="textbox"> 
+          <div class="label-box">捕獲地</div>
+          <div class="field">
+            <%= info.text_field :location, size: 20 %>
+          </div>
+        </div>
+
+      </div>
+        <button type="button" onclick="getLocation()">現在地を取得</button>
+
+    <div class="info-form-title">動物情報</div>
+    <div class="info-row">
+      <div class="textbox"> 
+        <div class="label-box">捕獲方法</div>
+        <div class="field">
+          <%= info.select :method, [["銃","銃"], ["わな","わな"], ["その他","その他"]] %>
+        </div>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">種類</div>
+        <div class="field">
+          <%= info.select :species, [["シカ","シカ"], ["イノシシ","イノシシ"], ["その他","その他"]] %>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="textbox"> 
+        <div class="label-box">推定月齢</div>
+        <div class="field">
+          <%= info.select :ages, (0..50).to_a, {include_blank: "月齢を選択"} %> <br>
+        </div>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">体重</div>
+        <div class="field">
+          <%= info.select :weight, (0..300).to_a, {include_blank: "体重を選択"} %> <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-form-title">解体・加工情報</div>
+    <div class="info-row">
+      <div class="textbox">
+        <div class="label-box">解体日</div>
+        <div class="field">
+          <%= info.date_field :butchering_date, value:Date.today %> <br> 
+        </div>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">解体施設</div>
+        <div class="field">
+          <%= info.text_field :processed_location, size: 20 %> <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="textbox"> 
+        <div class="label-box">加工日</div>
+        <div class="field">
+          <%= info.date_field :processed_date, value:Date.today %> <br>
+        </div>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">加工者</div>
+        <div class="field">
+          <%= info.text_field :processed_by, size: 20 %> <br>
+        </div>
+      </div>
+    </div> 
+ 
+    <div class="submit-button">
+      <%= info.submit "登録する" %>
+    </div>
+
+  <% end %>
+</body>
+
+
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function showPosition(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    document.getElementById("latitude").value = latitude;
+    document.getElementById("longitude").value = longitude;
+
+    var geocoder = new google.maps.Geocoder();
+    var latLng = new google.maps.LatLng(latitude, longitude);
+
+    geocoder.geocode({ 'latLng': latLng }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          var address = results[1].formatted_address;
+          document.getElementById("location").value = address;
+       }else{
+          alert("No results found");
+       }
+      }else{
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+  
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?
+key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer></script>

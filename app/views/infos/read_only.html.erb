@@ -1,0 +1,70 @@
+**info_new.cssを読み込む**
+<%= stylesheet_link_tag 'info_new' %>
+
+<h1>個体詳細</h1>
+
+<div class="info">
+
+  <div class="each-info">
+    <h3>基本情報</h3>
+    <p><strong>識別番号:</strong><%= @info.identifier %></p>
+    <p><strong>捕獲者:</strong><%= @info.hunter %></p>
+    <p><strong>捕獲日:</strong><%= @info.Hunteddate %></p>
+  </div>
+
+  <div class="each-info">
+    <h3>場所情報</h3>
+    <p><strong>捕獲地:</strong><%= @info.location %></p>
+    <p> 緯度: <%= @info.latitude %> 経度: <%= @info.longitude %></p>
+
+      #Google Maps APIを使って地図を表示する
+      <div id="map"></div>
+  </div>
+
+  <div class="each-info">
+    <h3>動物情報</h3>
+    <p><strong>捕獲方法:</strong><%= @info.method %></p>
+    <p><strong>推定年齢:</strong><%= @info.ages %></p>
+    <p><strong>体重:</strong><%= @info.weight %></p>
+  </div>
+
+  <div class="each-info">
+    <h3>解体・加工情報</h3>
+    <p><strong>解体日:</strong><%= @info.butchering_date %></p>
+    <p><strong>加工施設:</strong><%= @info.processed_location %></p>
+    <p><strong>加工日:</strong><%= @info.processed_date %></p>
+    <p><strong>加工者:</strong><%= @info.processed_by %></p>
+  </div>
+
+  <style>
+    #map {
+      height: 200px;
+      width: 200px;
+    }
+  </style>
+
+</div>
+
+<script>
+let map
+
+function initMap() {
+  geocoder = new google.maps.Geocoder();
+  
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
+    zoom: 14,
+  });
+
+  marker = new google.maps.Marker({
+    position: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
+    map: map
+  });
+}
+</script>
+
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer>
+</script>
+
+
+<!-- AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw -->
