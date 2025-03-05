@@ -23,4 +23,4 @@ test:
 production:
   <<: *default
    adapter: postgresql
-  url: <%= ENV['postgresql://managing_postgresql_user:YwKrXP9T6ohpv7zwYzJWbK85z6Sbuzjv@dpg-cv44ghrqf0us73b5gmg0-a.singapore-postgres.render.com/managing_postgresql'] %>
+  url: <%= ENV['DATABASE_URL'] %>
