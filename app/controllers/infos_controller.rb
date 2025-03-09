@@ -83,13 +83,18 @@ class InfosController < ApplicationController
       redirect_to action: :index
     end
 
-  
     private
     def info_params
-      #仮でストロングパラメータを設定
-      #params.require(:info).permit(:identifier,:hunter)
-      params.require(:info).permit!
+      params.require(:info).permit(:identifier,
+       :hunter, :Hunteddate, 
+       :location, :method, 
+       :species, :ages, 
+       :weight, :butchering_date, 
+       :processed_location, 
+       :processed_date, 
+       :processed_by)
     end
+
     
 
 end
