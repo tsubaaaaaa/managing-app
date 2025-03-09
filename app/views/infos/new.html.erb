@@ -55,11 +55,11 @@
       <div class="textbox"> 
         <div class="label-box">捕獲方法</div>
         <div class="field">
-          <%= f.select :method,
-          [["銃","銃"], 
-          ["わな","わな"], 
-          ["その他","その他"]],
-          {include_blank: "選択してください"} %>
+          <%= f.select :method, 
+        [["銃", "銃"], 
+        ["わな", "わな"],
+        ["その他", "その他"]],
+        { include_blank: "選択してください" } %>
         </div>
       </div>
 
@@ -68,9 +68,9 @@
         <div class="field">
           <%= f.select :species, 
           [["シカ","シカ"],
-           ["イノシシ","イノシシ"],
-            ["その他","その他"]],
-             {include_blank: "選択してください"} %>
+          ["イノシシ","イノシシ"],
+          ["その他","その他"]],
+          {include_blank: "選択してください" } %>
         </div>
       </div>
     </div>
