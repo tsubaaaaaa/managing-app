@@ -58,6 +58,9 @@
           <%= f.select :method, 
         [["銃", "銃"], 
         ["わな", "わな"],
+        ["釣り", "釣り"],
+        ["その他", "その他"]],
+        { include_blank: "選択してください" } %>
         ["その他", "その他"]],
         { include_blank: "選択してください" } %>
         </div>
@@ -66,11 +69,12 @@
       <div class="textbox"> 
         <div class="label-box">種類</div>
         <div class="field">
+        <!--もしmethodで釣りを選択したら魚の種類を表示し、それ以外なら動物を表示-->
           <%= f.select :species, 
-          [["シカ","シカ"],
-          ["イノシシ","イノシシ"],
-          ["その他","その他"]],
-          {include_blank: "選択してください" } %>
+            [],
+            { include_blank: "選択してください" },
+            id: "species_select"
+            %>
         </div>
       </div>
     </div>
@@ -131,6 +135,49 @@
   <% end %>
 </body>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const methodSelect = document.getElementById("method_select");
+    const speciesSelect = document.getElementById("species_select");
+
+    // 初期状態でspeciesを設定
+    function updateSpeciesOptions() {
+      const method = methodSelect.value;
+
+      let speciesOptions = [];
+
+      if (method === "釣り") {
+        speciesOptions = [
+          ["ニジマス", "ニジマス"],
+          ["サーモン", "サーモン"],
+          ["その他", "その他"]
+        ];
+      } else {
+        speciesOptions = [
+          ["シカ", "シカ"],
+          ["イノシシ", "イノシシ"],
+          ["その他", "その他"]
+        ];
+      }
+
+      // speciesの選択肢を更新
+      speciesSelect.innerHTML = ""; // 既存の選択肢をクリア
+
+      speciesOptions.forEach(function(option) {
+        const optionElement = document.createElement("option");
+        optionElement.value = option[0];
+        optionElement.textContent = option[1];
+        speciesSelect.appendChild(optionElement);
+      });
+    }
+
+    // methodが変更されるたびにupdateSpeciesOptionsを呼び出す
+    methodSelect.addEventListener("change", updateSpeciesOptions);
+
+    // 初期表示を設定
+    updateSpeciesOptions();
+  });
+</script>
 
 <script>
   function getLocation() {
@@ -165,6 +212,8 @@
   }
   
 </script>
+
+
 
 <script src="https://maps.googleapis.com/maps/api/js?
 key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer></script>
