@@ -60,7 +60,9 @@
         ["わな", "わな"],
         ["釣り", "釣り"],
         ["その他", "その他"]],
-        { include_blank: "選択してください" } %>
+        { include_blank: "選択してください" }
+        ,id :"method_select"
+         %>
         </div>
       </div>
 
@@ -175,9 +177,8 @@
     // 初期表示を設定
     updateSpeciesOptions();
   });
-</script>
 
-<script>
+
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
