@@ -14,6 +14,7 @@ services:
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
+        value: postgresql://managingapp_db_user:PwB2zSZjIaVksvUqh1OAqOjStp26v4rb@dpg-cv6jo252ng1s73fup68g-a/managingapp_dbpostgresql://managingapp_db_user:PwB2zSZjIaVksvUqh1OAqOjStp26v4rb@dpg-cv6jo252ng1s73fup68g-a/managingapp_db
         fromDatabase:
           name: managingapp_db
           property: connectionString
