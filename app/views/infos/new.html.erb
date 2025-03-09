@@ -48,7 +48,7 @@
         </div>
 
       </div>
-        <button type="button" onclick="getLocation()">現在地を取得</button>
+        <!--button type="button" onclick="getLocation()">現在地を取得</button-->
 
     <div class="info-form-title">動物情報</div>
     <div class="info-row">
@@ -178,37 +178,6 @@
     updateSpeciesOptions();
   });
 
-
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-
-  function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    document.getElementById("latitude").value = latitude;
-    document.getElementById("longitude").value = longitude;
-
-    var geocoder = new google.maps.Geocoder();
-    var latLng = new google.maps.LatLng(latitude, longitude);
-
-    geocoder.geocode({ 'latLng': latLng }, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          var address = results[1].formatted_address;
-          document.getElementById("location").value = address;
-       }else{
-          alert("No results found");
-       }
-      }else{
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  }
   
 </script>
 
