@@ -12,7 +12,7 @@ class InfosController < ApplicationController
       if params[:search].present?
         search = "%#{params[:search]}%"
         #部分一致検索
-        @infos = Info.where("identifier LIKE ? OR hunter LIKE ?", search, search)
+        @infos = Info.where("CAST(identifier AS TEXT) LIKE ? OR hunter LIKE ?", search, search)
       end
 
       #日付絞込
