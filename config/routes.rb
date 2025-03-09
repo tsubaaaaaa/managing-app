@@ -23,8 +23,9 @@ Rails.application.routes.draw do
   delete 'infos/:id' => 'infos#destroy'
   get 'infos/:id/edit' => 'infos#edit', as: 'edit_info'
 
-  #read_onlyへのルーティング
-  #get 'infos/:id' => 'infos#read_only' as: 'info'
+  #read_onlyへのルーティング /infos/read_only/:id
+  get 'infos/read_only/:id' => 'infos#read_only', as: 'read_only_info'
+  
 
   #市区町村取得
 

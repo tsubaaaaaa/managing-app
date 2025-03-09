@@ -3,6 +3,8 @@ require 'json'
 
 class InfosController < ApplicationController
 
+  layout "read_only", only:[:read_only]
+
     def index
 
       @infos = Info.all
@@ -61,6 +63,10 @@ class InfosController < ApplicationController
     end
 
     def show #投稿の詳細を表示するためのアクション
+      @info = Info.find(params[:id])
+    end
+
+    def read_only
       @info = Info.find(params[:id])
     end
 

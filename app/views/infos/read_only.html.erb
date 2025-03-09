@@ -1,70 +1,122 @@
-**info_new.cssを読み込む**
-<%= stylesheet_link_tag 'info_new' %>
+<!DOCTYPE html>
+<!--aplication.html.erbを読み込まない-->
 
-<h1>個体詳細</h1>
+<html>
+  <head>
+    <title>個体詳細</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'info_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-<div class="info">
+<body>
 
-  <div class="each-info">
-    <h3>基本情報</h3>
-    <p><strong>識別番号:</strong><%= @info.identifier %></p>
-    <p><strong>捕獲者:</strong><%= @info.hunter %></p>
-    <p><strong>捕獲日:</strong><%= @info.Hunteddate %></p>
+<div class="title">
+  <h1>個体詳細</h1>
+</div>
+
+<div class="info-container">
+  <%# qrコードをクリックして新しいタブで開く %>
+  
+  <div class="qrcode">
+    <%= image_tag qrcode("/infos/read_only/#{@info[:id]}") %>
   </div>
 
   <div class="each-info">
-    <h3>場所情報</h3>
-    <p><strong>捕獲地:</strong><%= @info.location %></p>
-    <p> 緯度: <%= @info.latitude %> 経度: <%= @info.longitude %></p>
+    <div class="info-title">基本情報</div>
+    <div class="info-row">
 
-      #Google Maps APIを使って地図を表示する
-      <div id="map"></div>
+      <div class="textbox"> 
+        <div class="label-box">識別番号</div>
+        <%= @info.identifier %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲者</div> 
+        <%= @info.hunter %>
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲日</div>
+        <%= @info.Hunteddate %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲地</div>
+        <%= @info.location %>
+      </div>
+
+    </div>
+      <%# #Google Maps APIを使って地図を表示する %>
+      <%# <div id="map"></div> %>
   </div>
 
   <div class="each-info">
-    <h3>動物情報</h3>
-    <p><strong>捕獲方法:</strong><%= @info.method %></p>
-    <p><strong>推定年齢:</strong><%= @info.ages %></p>
-    <p><strong>体重:</strong><%= @info.weight %></p>
+    <div class="info-title">個体情報</div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">捕獲方法</div>
+        <%= @info.method %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">種類</div> 
+        <%= @info.species %>
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">推定月齢</div>
+        <%= @info.ages %> 
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">体重</div>
+        <%= @info.weight %> kg
+      </div>
+
+    </div>
   </div>
 
   <div class="each-info">
-    <h3>解体・加工情報</h3>
-    <p><strong>解体日:</strong><%= @info.butchering_date %></p>
-    <p><strong>加工施設:</strong><%= @info.processed_location %></p>
-    <p><strong>加工日:</strong><%= @info.processed_date %></p>
-    <p><strong>加工者:</strong><%= @info.processed_by %></p>
-  </div>
+    <div class="info-title">解体・加工情報</div>
+    <div class="info-row">
 
-  <style>
-    #map {
-      height: 200px;
-      width: 200px;
-    }
-  </style>
+      <div class="textbox"> 
+        <div class="label-box">解体日</div>
+        <%= @info.butchering_date %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">加工施設</div>
+        <%= @info.processed_location %>
+      </div>
+
+    </div>
+    <div class="info-row">
+
+      <div class="textbox"> 
+        <div class="label-box">加工日</div>
+        <%= @info.processed_date %>
+      </div>
+
+      <div class="textbox"> 
+        <div class="label-box">加工者</div>
+        <%= @info.processed_by %>
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
-<script>
-let map
+</body>
 
-function initMap() {
-  geocoder = new google.maps.Geocoder();
-  
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
-    zoom: 14,
-  });
-
-  marker = new google.maps.Marker({
-    position: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
-    map: map
-  });
-}
-</script>
-
-<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer>
-</script>
-
-
-<!-- AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw -->
