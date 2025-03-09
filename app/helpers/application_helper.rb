@@ -7,7 +7,7 @@ module ApplicationHelper
     def qrcode(url)
         if Rails.env.production?
             # 本番環境の場合
-            qrcode = RQRCode::QRCode.new("https://managing-info.herokuapp.com#{url}")
+            qrcode = RQRCode::QRCode.new("https://managing-app.onrender.com#{url}")
         elsif Rails.env.development?
             # 開発環境の場合
             qrcode = RQRCode::QRCode.new("http://localhost:3000#{url}")
