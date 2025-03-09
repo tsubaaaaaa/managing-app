@@ -11,10 +11,12 @@
 
   <body>
     <header>
-      <h3><%= link_to "管理アプリ（仮）", root_path %></h3>
+      <div class=title_link>
+        <%= link_to "管理アプリ（仮）", root_path %>
+      </div>
       <div class="header-list">
         <ul>
-          <li><%= link_to "新規投稿ページへ", infos_new_path %></li>
+          <div class=new_link><%= link_to "新規登録", infos_new_path %></ldiv>
         </ul>
         <ul>
           <%# カメラを起動する %>

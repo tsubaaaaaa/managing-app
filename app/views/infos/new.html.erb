@@ -7,8 +7,12 @@
   </head>
 
 <body>
-  <h1>新規</h1>
-  <%= link_to "一覧に戻る", root_path %>
+  <!--h1>新規</h1-->
+
+  <div class="back-link">
+    <link_to onclick="window.location.href='<%= root_path %>'">一覧に戻る</button>
+  </div>
+
 
   <div class ="info-form-container">
     <%= form_for @info do |f| %>
@@ -81,6 +85,7 @@
 
     <div class="info-row">
       <div class="textbox"> 
+      <!--もしmethodで釣りならlabel-boxに身長をを、それ以外なら月齢を-->
         <div class="label-box">推定月齢</div>
         <div class="field">
           <%= f.select :ages, (0..50).to_a, {include_blank: "月齢を選択"} %> <br>
@@ -128,8 +133,10 @@
       </div>
     </div> 
  
-    <div class="submit-button">
-      <%= f.submit "登録する" %>
+    <div class="button-container">
+      <div class="submit-button">
+        <%= f.submit "新規登録", class:"btn btn-green" %>
+      </div>
     </div>
 
   <% end %>

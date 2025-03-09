@@ -38,6 +38,21 @@
     color: white;
     margin-left: 20px;
   }
+
+  .title_link{
+    color: white;
+    font-size: larger;
+    margin-left: 20px;
+    text-decoration: none;
+  }
+
+  .new_link{
+    color: white;
+    font-size: larger;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+
   .header-list {
     display: flex;
     align-items: center;
@@ -50,6 +65,14 @@
     margin-right: 40px;
   }
 
+  .back-link {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: medium;
+    color: #171c33; /* 色を指定 */
+    text-decoration: underline; /* 下線を消す */
+  }
+  
   .button-container {
     position: relative; /* 親要素の中央に配置 */
     left: 50%;

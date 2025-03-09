@@ -1,3 +1,4 @@
+
 .info-form-container {
     display: flex;
     flex-direction: column;
@@ -92,3 +93,4 @@
 .btn-red {
     background-color: #dc3545; /* 赤 */
 }
+
