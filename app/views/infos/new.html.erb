@@ -11,8 +11,7 @@
   <%= link_to "一覧に戻る", root_path %>
 
   <div class ="info-form-container">
-    <%= form_for @info do |info| %>
-    
+    <%= form_for @info do |f| %>
 
       <div class="info-form-title">基本情報</div>
       <div class="info-form-row">
@@ -20,14 +19,14 @@
         <div class="textbox"> 
           <div class="label-box">識別番号</div>
             <div class="field">
-              <%= info.text_field :identifier, size: 20 %>
+              <%= f.text_field :identifier, size: 20 %>
             </div>
         </div>
 
         <div class="textbox"> 
           <div class="label-box">捕獲者</div>
           <div class="field">
-            <%= info.text_field :hunter, size: 20 %>
+            <%= f.text_field :hunter, size: 20 %>
           </div>
         </div>
 
@@ -37,14 +36,14 @@
         <div class="textbox"> 
           <div class="label-box">捕獲日</div>
           <div class="field">
-            <%= info.date_field :Hunteddate, value:Date.today %> <br>
+            <%= f.date_field :Hunteddate, value:Date.today %> <br>
           </div>
         </div>
 
         <div class="textbox"> 
           <div class="label-box">捕獲地</div>
           <div class="field">
-            <%= info.text_field :location, size: 20 %>
+            <%= f.text_field :location, size: 20 %>
           </div>
         </div>
 
@@ -56,14 +55,22 @@
       <div class="textbox"> 
         <div class="label-box">捕獲方法</div>
         <div class="field">
-          <%= info.select :method, [["銃","銃"], ["わな","わな"], ["その他","その他"]] %>
+          <%= f.select :method,
+          [["銃","銃"], 
+          ["わな","わな"], 
+          ["その他","その他"]],
+          {include_blank: "選択してください"} %>
         </div>
       </div>
 
       <div class="textbox"> 
         <div class="label-box">種類</div>
         <div class="field">
-          <%= info.select :species, [["シカ","シカ"], ["イノシシ","イノシシ"], ["その他","その他"]] %>
+          <%= f.select :species, 
+          [["シカ","シカ"],
+           ["イノシシ","イノシシ"],
+            ["その他","その他"]],
+             {include_blank: "選択してください"} %>
         </div>
       </div>
     </div>
@@ -72,14 +79,14 @@
       <div class="textbox"> 
         <div class="label-box">推定月齢</div>
         <div class="field">
-          <%= info.select :ages, (0..50).to_a, {include_blank: "月齢を選択"} %> <br>
+          <%= f.select :ages, (0..50).to_a, {include_blank: "月齢を選択"} %> <br>
         </div>
       </div>
 
       <div class="textbox"> 
         <div class="label-box">体重</div>
         <div class="field">
-          <%= info.select :weight, (0..300).to_a, {include_blank: "体重を選択"} %> <br>
+          <%= f.select :weight, (0..300).to_a, {include_blank: "体重を選択"} %> <br>
         </div>
       </div>
     </div>
@@ -89,14 +96,14 @@
       <div class="textbox">
         <div class="label-box">解体日</div>
         <div class="field">
-          <%= info.date_field :butchering_date, value:Date.today %> <br> 
+          <%= f.date_field :butchering_date, value:Date.today %> <br> 
         </div>
       </div>
 
       <div class="textbox"> 
         <div class="label-box">解体施設</div>
         <div class="field">
-          <%= info.text_field :processed_location, size: 20 %> <br>
+          <%= f.text_field :processed_location, size: 20 %> <br>
         </div>
       </div>
     </div>
@@ -105,20 +112,20 @@
       <div class="textbox"> 
         <div class="label-box">加工日</div>
         <div class="field">
-          <%= info.date_field :processed_date, value:Date.today %> <br>
+          <%= f.date_field :processed_date, value:Date.today %> <br>
         </div>
       </div>
 
       <div class="textbox"> 
         <div class="label-box">加工者</div>
         <div class="field">
-          <%= info.text_field :processed_by, size: 20 %> <br>
+          <%= f.text_field :processed_by, size: 20 %> <br>
         </div>
       </div>
     </div> 
  
     <div class="submit-button">
-      <%= info.submit "登録する" %>
+      <%= f.submit "登録する" %>
     </div>
 
   <% end %>
