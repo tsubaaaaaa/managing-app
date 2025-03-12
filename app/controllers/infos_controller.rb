@@ -3,6 +3,7 @@ require 'json'
 
 class InfosController < ApplicationController
   before_action :validate_access_token, only: [:read_only]
+  before_action :restrict_read_only_access, except: [:read_only]
 
   layout "read_only", only:[:read_only]
 
@@ -111,7 +112,14 @@ class InfosController < ApplicationController
        :processed_date, 
        :processed_by)
     end
-
+      
+        # read_onlyのユーザーを他のページにアクセスさせない
+    def restrict_read_only_access
+      if session[:read_only_access]
+        redirect_to root_path, alert: "アクセスが許可されていません"
+      end
+    end
+    
     def validate_access_token
       @info = Info.find_by(id: params[:id], access_token: params[:token])
   
