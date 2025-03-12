@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_12_102110) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_115629) do
   create_table "infos", force: :cascade do |t|
     t.text "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "identifier"
+    t.string "identifier"
     t.string "hunter"
     t.string "location"
     t.date "Hunteddate"
