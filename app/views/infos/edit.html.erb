@@ -44,7 +44,7 @@
                 <div class="textbox"> 
                   <div class="label-box">捕獲地</div>
                   <div class="field">
-                    <%= f.text_field :location, size: 20, readonly: true %>
+                    <%= f.text_field :location, size: 20 %>
                   </div>
                 </div>
 
@@ -94,20 +94,17 @@
             </div>
 
             <div class="info-row">
-              <div class="textbox"> 
-              <!--もしmethodで釣りならlabel-boxに身長を、それ以外なら月齢を-->
+              <div class="textbox">
                 <div class="label-box">推定月齢</div>
                 <div class="field">
                   <%= f.select :ages, 
                   (0..151).to_a, 
-                  {include_blank: "選択してください"},
-                  id: "detail_select"
-                  %> 
+                  {include_blank: "選択してください"}%> 
                 </div>
               </div>
 
               <div class="textbox"> 
-                <div class="label-box" id="WorL_label">体重 kg</div>
+                <div class="label-box">体重 kg</div>
                 <div class="field">
 
                   <%= f.text_field :weight,
@@ -172,7 +169,7 @@
   document.addEventListener("DOMContentLoaded", function() {
     const methodSelect = document.getElementById("method_select");
     const speciesSelect = document.getElementById("species_select");
-    const detailSelect = document.getElementById("detail_select");
+    //const detailSelect = document.getElementById("detail_select");
     //const WorLSelect = document.getElementById("WorL_select");
 
     const methodInput = document.getElementById("method_input");
