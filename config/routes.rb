@@ -28,6 +28,6 @@ Rails.application.routes.draw do
   
 
    # エラーページをカスタムルートに設定
-  get "/500", to: "errors#internal_server_error"
+  #get "/500", to: "errors#internal_server_error"
 
 end
