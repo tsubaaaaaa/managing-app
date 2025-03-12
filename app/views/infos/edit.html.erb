@@ -109,16 +109,10 @@
               <div class="textbox"> 
                 <div class="label-box" id="WorL_label">体重 kg</div>
                 <div class="field">
-                  <%= f.select :weight, 
-                  [], 
-                  {include_blank: "選択してください"},
-                  id: "WorL_select"
-                  %> 
 
                   <%= f.text_field :weight,
                   placeholder: "数値を入力", 
-                  style: "display: none;", 
-                  id: "WorL_input" 
+                  size: 20
                   %>
 
                 </div>
@@ -179,11 +173,11 @@
     const methodSelect = document.getElementById("method_select");
     const speciesSelect = document.getElementById("species_select");
     const detailSelect = document.getElementById("detail_select");
-    const WorLSelect = document.getElementById("WorL_select");
+    //const WorLSelect = document.getElementById("WorL_select");
 
     const methodInput = document.getElementById("method_input");
     const speciesInput = document.getElementById("species_input");
-    const WorLInput = document.getElementById("WorL_input");
+    //const WorLInput = document.getElementById("WorL_input");
 
     function updateMethodsOptions(){
       methodInput.style.display = "none"; // 初期状態では非表示
@@ -244,7 +238,7 @@
 
     }
 
-    function updateWorLOptions() {
+    /*function updateWorLOptions() {
       const method = methodSelect.value;
 
       let WorLOptions = [];
@@ -271,12 +265,12 @@
       WorLSelect.value = "";
       WorLInput.style.display = "none"; // 初期状態では非表示
       WorLInput.value = ""; // 初期化
-    }
+    } */
 
     // 初期表示を設定
     updateMethodsOptions();
     updateSpeciesOptions();
-    updateWorLOptions();
+    //updateWorLOptions();
   });
 
   
