@@ -10,5 +10,9 @@ class AddSpeciesToInfos < ActiveRecord::Migration[7.1]
     add_column :infos, :processed_date, :date
     add_column :infos, :processed_by, :string
     
+    
+    change_column :infos, :identifier, :string
+    
+
   end
 end

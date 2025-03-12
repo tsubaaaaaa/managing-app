@@ -45,7 +45,7 @@ class InfosController < ApplicationController
         end
 
       #ページネーション
-        @infos = @infos.page(params[:page]).per(5)
+        @infos = @infos.page(params[:page]).per(15)
 
     end
 
