@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'infos/read_only/:id' => 'infos#read_only', as: 'read_only_info'
   
 
-  #市区町村取得
+   # エラーページをカスタムルートに設定
+  get "/500", to: "errors#internal_server_error"
 
 end
