@@ -1,15 +1,18 @@
 
 class Info < ApplicationRecord\
 
-    #before_create :set_address
+    before_create :generate_access_token
 
-    #def set_address
-    #  return if latitude.blank? || longitude.blank?
-        #results = Geocoder.search([latitude, longitude], language: :ja)
-        #if results.present?
-        #self.address = results.first.address
-        #else
-        #self.address = "住所が見つかりませんでした"
-        #end
-    #end
+    validates :identifier, 
+               presence: true,
+               format: { with: /\A\d{10}\z/, message: "半角数字10桁で入力してください" }
+
+
+
+    private
+  
+    def generate_access_token
+      self.access_token = SecureRandom.hex(10) unless self.access_token.present?
+    end
+    
 end

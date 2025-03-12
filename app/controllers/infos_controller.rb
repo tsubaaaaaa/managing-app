@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 
 class InfosController < ApplicationController
+  before_action :validate_access_token, only: [:read_only]
 
   layout "read_only", only:[:read_only]
 
@@ -54,11 +55,11 @@ class InfosController < ApplicationController
     end
 
     def create #新規投稿を保存するためのアクション
-    info = Info.new(info_params)
-      if info.save
-        redirect_to :action => "index"
+      @info = Info.new(info_params)
+      if @info.save
+        redirect_to :action => "index", notice: '保存されました'
       else
-        redirect_to :action => "new"
+        render :new
       end
     end
 
@@ -89,7 +90,17 @@ class InfosController < ApplicationController
       redirect_to action: :index
     end
 
+    def read_only
+      @info = Info.find_by(id: params[:id], access_token: params[:token])
+    
+      if @info.nil?
+        render plain: "アクセスが許可されていません", status: :forbidden
+      end
+    end
+
+
     private
+
     def info_params
       params.require(:info).permit(:identifier,
        :hunter, :Hunteddate, 
@@ -101,6 +112,12 @@ class InfosController < ApplicationController
        :processed_by)
     end
 
-    
+    def validate_access_token
+      @info = Info.find_by(id: params[:id], access_token: params[:token])
+  
+      unless @info
+        render plain: "アクセスが許可されていません", status: :forbidden
+      end
+    end
 
 end

@@ -20,14 +20,14 @@
                 <div class="textbox"> 
                   <div class="label-box">識別番号</div>
                     <div class="field">
-                      <%= f.text_field :identifier, size: 20 %>
+                      <%= f.text_field :identifier, size: 20, readonly: true %>
                     </div>
                 </div>
 
                 <div class="textbox"> 
                   <div class="label-box">捕獲者</div>
                   <div class="field">
-                    <%= f.text_field :hunter, size: 20 %>
+                    <%= f.text_field :hunter, size: 20, readonly: true %>
                   </div>
                 </div>
 
@@ -37,14 +37,14 @@
                 <div class="textbox"> 
                   <div class="label-box">捕獲日</div>
                   <div class="field">
-                    <%= f.date_field :Hunteddate%> 
+                    <%= f.date_field :Hunteddate , readonly: true%> 
                   </div>
                 </div>
 
                 <div class="textbox"> 
                   <div class="label-box">捕獲地</div>
                   <div class="field">
-                    <%= f.text_field :location, size: 20 %>
+                    <%= f.text_field :location, size: 20, readonly: true %>
                   </div>
                 </div>
 
@@ -107,7 +107,7 @@
               </div>
 
               <div class="textbox"> 
-                <div class="label-box" id="WorL_label">体重</div>
+                <div class="label-box" id="WorL_label">体重 kg</div>
                 <div class="field">
                   <%= f.select :weight, 
                   [], 

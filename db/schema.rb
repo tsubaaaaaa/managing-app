@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_02_064038) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_102110) do
   create_table "infos", force: :cascade do |t|
     t.text "number"
     t.datetime "created_at", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_02_064038) do
     t.date "processed_date"
     t.string "processed_by"
     t.string "species"
+    t.string "access_token"
   end
 
 end

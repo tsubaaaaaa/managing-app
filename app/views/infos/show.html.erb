@@ -16,8 +16,9 @@
   <%# qrコードをクリックして新しいタブで開く %>
   
   <div class="qrcode">
-    <%= image_tag qrcode("/infos/read_only/#{@info[:id]}") %>
+    <%= image_tag qrcode(@info) %>
   </div>
+
 
   <div class="each-info">
     <div class="info-title">基本情報</div>

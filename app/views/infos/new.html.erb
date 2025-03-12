@@ -15,17 +15,21 @@
 
 
   <div class ="info-form-container">
-    <%= form_for @info do |f| %>
+    <%= form_with model: @info, local: true do |f| %>
 
       <div class="info-form-title">基本情報</div>
       <div class="info-form-row">
       
         <div class="textbox"> 
           <div class="label-box">識別番号</div>
-            <div class="field">
-              <%= f.text_field :identifier, size: 20 %>
-            </div>
+          <div class="field <%= 'error' if @info&.errors[:identifier].any? %>">
+            <%= f.text_field :identifier, size: 20 %>
+            <% if @info&.errors[:identifier].any? %>
+              <span class="error-message"><%= @info.errors[:identifier].first %></span>
+            <% end %>
+          </div>
         </div>
+
 
         <div class="textbox"> 
           <div class="label-box">捕獲者</div>
@@ -110,7 +114,7 @@
       </div>
 
       <div class="textbox"> 
-        <div class="label-box" id="WorL_label">体重</div>
+        <div class="label-box" id="WorL_label">体重 kg</div>
         <div class="field">
           <%= f.select :weight, 
           [], 
@@ -171,6 +175,16 @@
 </body>
 
 <script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const identifierField = document.querySelector(".identifier-field");
+
+    identifierField.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, "").slice(0, 10); 
+    });
+  });
+
+
   document.addEventListener("DOMContentLoaded", function() {
     const methodSelect = document.getElementById("method_select");
     const speciesSelect = document.getElementById("species_select");
