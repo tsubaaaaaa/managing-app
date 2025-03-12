@@ -8,6 +8,9 @@ class InfosController < ApplicationController
   layout "read_only", only:[:read_only]
 
     def index
+      if session[:read_only_access]
+        redirect_to read_only_info_path(@info), alert: "閲覧モードではこのページにアクセスできません"
+      end
 
       @infos = Info.all
 
@@ -92,10 +95,10 @@ class InfosController < ApplicationController
     end
 
     def read_only
-      @info = Info.find_by(id: params[:id], access_token: params[:token])
-    
       if @info.nil?
-        render plain: "アクセスが許可されていません", status: :forbidden
+        render "infos/error", status: :forbidden  # エラーページを表示
+      else
+        session[:read_only_access] = true
       end
     end
 
@@ -114,17 +117,15 @@ class InfosController < ApplicationController
     end
       
         # read_onlyのユーザーを他のページにアクセスさせない
-    def restrict_read_only_access
-      if session[:read_only_access]
-        redirect_to root_path, alert: "アクセスが許可されていません"
-      end
-    end
-    
+     # 認証トークンをチェック
     def validate_access_token
       @info = Info.find_by(id: params[:id], access_token: params[:token])
-  
-      unless @info
-        render plain: "アクセスが許可されていません", status: :forbidden
+    end
+
+    # read_only モードのユーザーを他のページにアクセスさせない
+    def restrict_read_only_access
+      if session[:read_only_access] && action_name != "read_only"
+        redirect_to read_only_info_path(@info), alert: "閲覧モードではこのページにアクセスできません"
       end
     end
 
