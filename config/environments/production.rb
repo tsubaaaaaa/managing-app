@@ -5,7 +5,8 @@ Rails.application.configure do
 
   Rails.application.config.hosts << "managing-app.onrender.com"
 
-  
+  Rails.application.routes.default_url_options[:host] = "managing-app.onrender.com"
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
