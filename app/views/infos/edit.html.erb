@@ -8,34 +8,26 @@
 
 <body>
 
+<%= form_for @info do |info| %>
   <%= form_for @info do |info| %>
-    <%= form_for @info do |info| %>
-  
-      <div class="title">
-        編集画面
-      </div>
 
           <div class ="info-form-container">
-            <%= form_for @info do |info| %>
-              <!--
-                      <div class="qrcode">
-                        <%= image_tag qrcode("/infos/read_only/#{@info[:id]}") %>
-                      </div>
-              -->
+            <%= form_for @info do |f| %>
+
               <div class="info-form-title">基本情報</div>
               <div class="info-form-row">
               
                 <div class="textbox"> 
                   <div class="label-box">識別番号</div>
                     <div class="field">
-                      <%= info.text_field :identifier, size: 20 %>
+                      <%= f.text_field :identifier, size: 20 %>
                     </div>
                 </div>
 
                 <div class="textbox"> 
                   <div class="label-box">捕獲者</div>
                   <div class="field">
-                    <%= info.text_field :hunter, size: 20 %>
+                    <%= f.text_field :hunter, size: 20 %>
                   </div>
                 </div>
 
@@ -45,87 +37,128 @@
                 <div class="textbox"> 
                   <div class="label-box">捕獲日</div>
                   <div class="field">
-                    <%= info.date_field :Hunteddate, value:Date.today %> <br>
+                    <%= f.date_field :Hunteddate%> 
                   </div>
                 </div>
 
                 <div class="textbox"> 
                   <div class="label-box">捕獲地</div>
                   <div class="field">
-                    <%= info.text_field :location, size: 20 %>
+                    <%= f.text_field :location, size: 20 %>
                   </div>
                 </div>
 
               </div>
-                <button type="button" onclick="getLocation()">現在地を取得</button>
+                <!--button type="button" onclick="getLocation()">現在地を取得</button-->
 
-              <div class="info-form-title">動物情報</div>
-              <div class="info-row">
-                <div class="textbox"> 
-                  <div class="label-box">捕獲方法</div>
-                  <div class="field">
-                    <%= info.select :method, [["銃","銃"], ["わな","わな"], ["その他","その他"]] %>
-                  </div>
-                </div>
+            <div class="info-form-title">動物情報</div>
+            <div class="info-row">
+              <div class="textbox"> 
+                <div class="label-box">捕獲方法</div>
+                <div class="field">
+                  <%= f.select :method, 
+                    [["銃", "銃"], 
+                    ["わな", "わな"],
+                    ["釣り", "釣り"],
+                    ["その他", "other"]],
+                    { include_blank: "選択してください" },
+                    id: "method_select"
+                  %>
 
-                <div class="textbox"> 
-                  <div class="label-box">種類</div>
-                  <div class="field">
-                    <%= info.select :species, [["シカ","シカ"], ["イノシシ","イノシシ"], ["その他","その他"]] %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="info-row">
-                <div class="textbox"> 
-                  <div class="label-box">推定月齢</div>
-                  <div class="field">
-                    <%= info.select :ages, (0..50).to_a, {include_blank: "月齢を選択"} %> <br>
-                  </div>
-                </div>
-
-                <div class="textbox"> 
-                  <div class="label-box">体重</div>
-                  <div class="field">
-                    <%= info.select :weight, (0..300).to_a, {include_blank: "体重を選択"} %> <br>
-                  </div>
+                  <%= f.text_field :method,
+                    placeholder: "その他の捕獲方法を入力", 
+                    style: "display: none;", 
+                    id: "method_input" 
+                  %>
                 </div>
               </div>
 
-              <div class="info-form-title">解体・加工情報</div>
-              <div class="info-row">
-                <div class="textbox">
-                  <div class="label-box">解体日</div>
-                  <div class="field">
-                    <%= info.date_field :butchering_date, value:Date.today %> <br> 
-                  </div>
-                </div>
+              <div class="textbox"> 
+                <div class="label-box">種類</div>
+                <div class="field">
+                <!--もしmethodで釣りを選択したら魚の種類を表示し、それ以外なら動物を表示-->
+                  <%= f.select :species, 
+                    [],
+                    { include_blank: "選択してください" },
+                    id: "species_select"
+                    %>
 
-                <div class="textbox"> 
-                  <div class="label-box">解体施設</div>
-                  <div class="field">
-                    <%= info.text_field :processed_location, size: 20 %> <br>
-                  </div>
+                  <%= f.text_field :species,
+                  placeholder: "その他の種類を入力", 
+                  style: "display: none;", 
+                  id: "species_input" 
+                  %>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="textbox"> 
+              <!--もしmethodで釣りならlabel-boxに身長を、それ以外なら月齢を-->
+                <div class="label-box">推定月齢</div>
+                <div class="field">
+                  <%= f.select :ages, 
+                  (0..151).to_a, 
+                  {include_blank: "選択してください"},
+                  id: "detail_select"
+                  %> 
                 </div>
               </div>
 
-              <div class="info-row">
-                <div class="textbox"> 
-                  <div class="label-box">加工日</div>
-                  <div class="field">
-                    <%= info.date_field :processed_date, value:Date.today %> <br>
-                  </div>
-                </div>
+              <div class="textbox"> 
+                <div class="label-box" id="WorL_label">体重</div>
+                <div class="field">
+                  <%= f.select :weight, 
+                  [], 
+                  {include_blank: "選択してください"},
+                  id: "WorL_select"
+                  %> 
 
-                <div class="textbox"> 
-                  <div class="label-box">加工者</div>
-                  <div class="field">
-                    <%= info.text_field :processed_by, size: 20 %> <br>
-                  </div>
+                  <%= f.text_field :weight,
+                  placeholder: "数値を入力", 
+                  style: "display: none;", 
+                  id: "WorL_input" 
+                  %>
+
                 </div>
-              </div> 
-            <% end %>
-            
+              </div>
+            </div>
+
+            <div class="info-form-title">解体・加工情報</div>
+            <div class="info-row">
+              <div class="textbox">
+                <div class="label-box">解体日</div>
+                <div class="field">
+                  <%= f.date_field :butchering_date %>  
+                </div>
+              </div>
+
+              <div class="textbox"> 
+                <div class="label-box">解体施設</div>
+                <div class="field">
+                  <%= f.text_field :processed_location, size: 20 %> 
+                </div>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="textbox"> 
+                <div class="label-box">加工日</div>
+                <div class="field">
+                  <%= f.date_field :processed_date %> 
+                </div>
+              </div>
+
+              <div class="textbox"> 
+                <div class="label-box">加工者</div>
+                <div class="field">
+                  <%= f.text_field :processed_by, size: 20 %> 
+                </div>
+              </div>
+            </div> 
+          <% end %>
+
             <div class="button-container">
               <div class="submit-button">
                 <%= info.submit "変更", class:"btn btn-green" %>
@@ -135,8 +168,116 @@
                 data: { confirm: "本当に削除しますか？" }, class:"btn btn-red" %>
               </div>
             </div>
-          </div>
-
-    <% end %>
   <% end %>
+<% end %>
 </body>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const methodSelect = document.getElementById("method_select");
+    const speciesSelect = document.getElementById("species_select");
+    const detailSelect = document.getElementById("detail_select");
+    const WorLSelect = document.getElementById("WorL_select");
+
+    const methodInput = document.getElementById("method_input");
+    const speciesInput = document.getElementById("species_input");
+    const WorLInput = document.getElementById("WorL_input");
+
+    function updateMethodsOptions(){
+      methodInput.style.display = "none"; // 初期状態では非表示
+      methodInput.value = ""; // 初期化
+    }
+
+      methodSelect.addEventListener("change", function () {
+        if (methodSelect.value === "other") {
+          methodInput.style.display = "inline-block"; // テキストボックスを表示
+          methodInput.focus();
+        } else {
+          methodInput.style.display = "none"; // 非表示
+          methodInput.value = ""; // 入力をクリア
+        }
+
+        updateSpeciesOptions();
+        updateWorLOptions();
+      });
+    
+
+    // 初期状態でspeciesを設定
+    function updateSpeciesOptions() {
+      const method = methodSelect.value;
+
+      let speciesOptions = [["", "選択してください"]];
+
+      if (method === "釣り") {
+        speciesOptions.push(
+          ["サクラマス", "サクラマス"],
+          ["サーモン", "サーモン"],
+          ["other", "その他"]
+        );
+      } else if (method === "other") {
+        speciesInput.style.display = "inline-block"; // method が "other" の場合は入力欄を表示
+        speciesInput.focus();
+        return; // select を更新しない
+      } else {
+        speciesOptions.push(
+          ["シカ", "シカ"],
+          ["イノシシ", "イノシシ"],
+          ["other", "その他"]
+        );
+      }
+
+      // speciesの選択肢を更新
+      speciesSelect.innerHTML = ""; // 既存の選択肢をクリア
+
+      speciesOptions.forEach(function(option) {
+        const optionElement = document.createElement("option");
+        optionElement.value = option[0];
+        optionElement.textContent = option[1];
+        speciesSelect.appendChild(optionElement);
+      });
+
+      speciesSelect.value = "";
+      speciesInput.style.display = "none"; // 初期状態では非表示
+      speciesInput.value = ""; // 初期化
+
+    }
+
+    function updateWorLOptions() {
+      const method = methodSelect.value;
+
+      let WorLOptions = [];
+      if (method === "釣り") {
+        WorLOptions = Array.from({ length: 101 }, (_, i) => (i * 0.1).toFixed(1)); // 0.0〜10.0
+      } else if (method === "other") {
+        WorLInput.style.display = "inline-block"; // method が "other" の場合は入力欄を表示
+        WorLInput.focus();
+        return; // select を更新しない
+      } else {
+        WorLOptions = Array.from({ length: 201 }, (_, i) => i); // 0〜200
+      }
+
+      // WeightかLengthの選択肢を更新
+      WorLSelect.innerHTML = ""; // 既存の選択肢をクリア
+
+      WorLOptions.forEach(function(option) {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.textContent = option;
+        WorLSelect.appendChild(optionElement);
+      });
+
+      WorLSelect.value = "";
+      WorLInput.style.display = "none"; // 初期状態では非表示
+      WorLInput.value = ""; // 初期化
+    }
+
+    // 初期表示を設定
+    updateMethodsOptions();
+    updateSpeciesOptions();
+    updateWorLOptions();
+  });
+
+  
+</script>
