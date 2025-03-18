@@ -8,12 +8,10 @@
 
 <body>
 
-<%= form_for @info do |info| %>
-  <%= form_for @info do |info| %>
+    <%= form_with model: @info,  local: true do |f| %>
 
-          <div class ="info-form-container">
-            <%= form_for @info do |f| %>
-
+      <div class ="info-form-container">
+            
               <div class="info-form-title">基本情報</div>
               <div class="info-form-row">
               
@@ -27,7 +25,7 @@
                 <div class="textbox"> 
                   <div class="label-box">捕獲者</div>
                   <div class="field">
-                    <%= f.text_field :hunter, size: 20, readonly: true %>
+                    <%= f.text_field :hunter, size: 20%>
                   </div>
                 </div>
 
@@ -37,7 +35,7 @@
                 <div class="textbox"> 
                   <div class="label-box">捕獲日</div>
                   <div class="field">
-                    <%= f.date_field :Hunteddate , readonly: true%> 
+                    <%= f.date_field :Hunteddate%> 
                   </div>
                 </div>
 
@@ -49,8 +47,7 @@
                 </div>
 
               </div>
-                <!--button type="button" onclick="getLocation()">現在地を取得</button-->
-
+ 
             <div class="info-form-title">動物情報</div>
             <div class="info-row">
               <div class="textbox"> 
@@ -65,30 +62,18 @@
                     id: "method_select"
                   %>
 
-                  <%= f.text_field :method,
-                    placeholder: "その他の捕獲方法を入力", 
-                    style: "display: none;", 
-                    id: "method_input" 
-                  %>
                 </div>
               </div>
 
               <div class="textbox"> 
                 <div class="label-box">種類</div>
                 <div class="field">
-                <!--もしmethodで釣りを選択したら魚の種類を表示し、それ以外なら動物を表示-->
+                <!--@info.speciesがnillでなければspeciesを表示-->
                   <%= f.select :species, 
                     [],
                     { include_blank: "選択してください" },
                     id: "species_select"
-                    %>
-
-                  <%= f.text_field :species,
-                  placeholder: "その他の種類を入力", 
-                  style: "display: none;", 
-                  id: "species_input" 
                   %>
-
                 </div>
               </div>
             </div>
@@ -97,9 +82,10 @@
               <div class="textbox">
                 <div class="label-box">推定月齢</div>
                 <div class="field">
-                  <%= f.select :ages, 
-                  (0..151).to_a, 
-                  {include_blank: "選択してください"}%> 
+                  <%= f.text_field :ages,
+                  placeholder: "数値を入力", 
+                  size: 20
+                  %>
                 </div>
               </div>
 
@@ -148,127 +134,112 @@
                 </div>
               </div>
             </div> 
-          <% end %>
-
+      
+          
+       
             <div class="button-container">
               <div class="submit-button">
-                <%= info.submit "変更", class:"btn btn-green" %>
+                <%= f.submit "変更", class:"btn btn-green" %>
               </div>
+            
+           
+    <% end %>
+
               <div class = "delete-button">
                 <%= button_to "削除", info_path(@info.id), method: :delete, 
                 data: { confirm: "本当に削除しますか？" }, class:"btn btn-red" %>
               </div>
             </div>
-  <% end %>
-<% end %>
+            
+
+
 </body>
 
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const methodSelect = document.getElementById("method_select");
-    const speciesSelect = document.getElementById("species_select");
-    //const detailSelect = document.getElementById("detail_select");
-    //const WorLSelect = document.getElementById("WorL_select");
+document.addEventListener("DOMContentLoaded", function () {
+  const methodSelect = document.getElementById("method_select");
+  const speciesSelect = document.getElementById("species_select");
 
-    const methodInput = document.getElementById("method_input");
-    const speciesInput = document.getElementById("species_input");
-    //const WorLInput = document.getElementById("WorL_input");
 
-    function updateMethodsOptions(){
-      methodInput.style.display = "none"; // 初期状態では非表示
-      methodInput.value = ""; // 初期化
-    }
+    // 魚の種類のリスト
+  const fishSpecies = [
+    ["鮭", "鮭"],
+    ["鮭(イクラ)", "鮭(イクラ)"],
+    ["サクラマス", "サクラマス"],
+    ["鮎", "鮎"],
+    ["ヒラメ", "ヒラメ"],
+    ["ブリ", "ブリ"],
+    ["マグロ", "マグロ"]
+  ];
 
+  // 動物の種類のリスト
+  const animalSpecies = [
+    ["エゾシカ", "エゾシカ"],
+    ["ヒグマ", "ヒグマ"],
+    ["マガモ", "マガモ"],
+    ["カルガモ", "カルガモ"]
+  ];
+
+
+  // method_select が存在するか確認
+  if (methodSelect) {
       methodSelect.addEventListener("change", function () {
-        if (methodSelect.value === "other") {
-          methodInput.style.display = "inline-block"; // テキストボックスを表示
-          methodInput.focus();
-        } else {
-          methodInput.style.display = "none"; // 非表示
-          methodInput.value = ""; // 入力をクリア
-        }
+      console.log("選択された捕獲方法: " + methodSelect.value);
+    });
+  } else {
+    console.error("method_select が見つかりません");
+  }
 
-        updateSpeciesOptions();
-        updateWorLOptions();
-      });
-    
 
-    // 初期状態でspeciesを設定
-    function updateSpeciesOptions() {
-      const method = methodSelect.value;
+  if(speciesSelect){
+      speciesSelect.addEventListener("change", function () {
+      console.log("選択された獲物: " + speciesSelect.value);
+    });
+  } else {
+    console.error("method_select が見つかりません");
+  }
 
-      let speciesOptions = [["", "選択してください"]];
-
-      if (method === "釣り") {
-        speciesOptions.push(
-          ["サクラマス", "サクラマス"],
-          ["サーモン", "サーモン"],
-          ["other", "その他"]
-        );
-      } else if (method === "other") {
-        speciesInput.style.display = "inline-block"; // method が "other" の場合は入力欄を表示
-        speciesInput.focus();
-        return; // select を更新しない
-      } else {
-        speciesOptions.push(
-          ["シカ", "シカ"],
-          ["イノシシ", "イノシシ"],
-          ["other", "その他"]
-        );
-      }
-
-      // speciesの選択肢を更新
-      speciesSelect.innerHTML = ""; // 既存の選択肢をクリア
-
-      speciesOptions.forEach(function(option) {
-        const optionElement = document.createElement("option");
-        optionElement.value = option[0];
-        optionElement.textContent = option[1];
-        speciesSelect.appendChild(optionElement);
-      });
-
-      speciesSelect.value = "";
-      speciesInput.style.display = "none"; // 初期状態では非表示
-      speciesInput.value = ""; // 初期化
-
+  // method_select が変更されたときの処理
+  methodSelect.addEventListener("change", function () {
+    // 「釣り」だった場合
+    if (methodSelect.value === "釣り") {
+      updateSpeciesOptions(fishSpecies);
+    } else {
+      // それ以外の場合（動物）
+      updateSpeciesOptions(animalSpecies);
     }
-
-    /*function updateWorLOptions() {
-      const method = methodSelect.value;
-
-      let WorLOptions = [];
-      if (method === "釣り") {
-        WorLOptions = Array.from({ length: 101 }, (_, i) => (i * 0.1).toFixed(1)); // 0.0〜10.0
-      } else if (method === "other") {
-        WorLInput.style.display = "inline-block"; // method が "other" の場合は入力欄を表示
-        WorLInput.focus();
-        return; // select を更新しない
-      } else {
-        WorLOptions = Array.from({ length: 201 }, (_, i) => i); // 0〜200
-      }
-
-      // WeightかLengthの選択肢を更新
-      WorLSelect.innerHTML = ""; // 既存の選択肢をクリア
-
-      WorLOptions.forEach(function(option) {
-        const optionElement = document.createElement("option");
-        optionElement.value = option;
-        optionElement.textContent = option;
-        WorLSelect.appendChild(optionElement);
-      });
-
-      WorLSelect.value = "";
-      WorLInput.style.display = "none"; // 初期状態では非表示
-      WorLInput.value = ""; // 初期化
-    } */
-
-    // 初期表示を設定
-    updateMethodsOptions();
-    updateSpeciesOptions();
-    //updateWorLOptions();
   });
 
-  
+  //method_selectが既に選択されている場合の処理
+  if (methodSelect.value === "釣り") {
+    updateSpeciesOptions(fishSpecies);
+  } 
+  //わなor銃の場合はanimalSpecies
+  else if (methodSelect.value === "わな" || methodSelect.value === "銃") {
+    updateSpeciesOptions(animalSpecies);
+  } else {
+      // 未選択なら何もしない
+  }
+
+  // species_select の選択肢を更新する関数
+  function updateSpeciesOptions(speciesArray) {
+    // species_select の選択肢をクリア
+    speciesSelect.innerHTML = '';
+
+    // 新しい選択肢を追加 
+    speciesArray.forEach(function (species) {
+      const option = document.createElement('option');
+      option.value = species[1];
+      option.text = species[0];
+      speciesSelect.appendChild(option);
+    });
+
+    //@info.speciesを選択した状態にする
+    speciesSelect.value = "<%= @info.species %>";
+  }
+
+});
+
 </script>

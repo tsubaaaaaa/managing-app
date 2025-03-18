@@ -49,8 +49,6 @@
       </div>
 
     </div>
-      <%# #Google Maps APIを使って地図を表示する %>
-      <%# <div id="map"></div> %>
   </div>
 
   <div class="each-info">
@@ -132,24 +130,8 @@
 </body>
 
 <script>
-let map
 
-function initMap() {
-  geocoder = new google.maps.Geocoder();
-  
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
-    zoom: 14,
-  });
 
-  marker = new google.maps.Marker({
-    position: { lat: <%= @info.latitude %>, lng: <%= @info.longitude %> },
-    map: map
-  });
-}
-</script>
-
-<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA0425MwYfXL0IiHPayE9lUbNB3ux5Pscw&callback=initMap" async defer>
 </script>
 
 

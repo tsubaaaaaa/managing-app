@@ -17,7 +17,12 @@ class InfosController < ApplicationController
       if params[:search].present?
         search = "%#{params[:search]}%"
         #部分一致検索
-        @infos = Info.where("CAST(identifier AS TEXT) LIKE ? OR hunter LIKE ?", search, search)
+        @infos = Info.where(
+          "CAST(identifier AS TEXT) LIKE ?
+          OR hunter LIKE ?
+          OR species LIKE ?
+          OR location LIKE ?",
+           search, search, search, search)
       end
 
       #日付絞込
@@ -58,14 +63,20 @@ class InfosController < ApplicationController
       @info = Info.new
     end
 
-    def create #新規投稿を保存するためのアクション
+    def create # 新規投稿を保存するためのアクション
+
+      if params[:info][:method_other].present?
+        params[:info][:method] = params[:info][:method_other]
+      end
+
       @info = Info.new(info_params)
       if @info.save
-        redirect_to :action => "index", notice: '保存されました'
+        redirect_to action: "index", notice: '保存されました'
       else
         render :new
       end
     end
+    
 
     def show #投稿の詳細を表示するためのアクション
       @info = Info.find(params[:id])
@@ -104,6 +115,7 @@ class InfosController < ApplicationController
 
 
     private
+
 
     def info_params
       params.require(:info).permit(:identifier,
