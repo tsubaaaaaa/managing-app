@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
     t.float "latitude"
     t.float "longitude"
     t.string "method"
+    t.string "species"
     t.string "ages"
     t.string "sex"
     t.string "weight"
@@ -29,7 +30,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
     t.string "processed_location"
     t.date "processed_date"
     t.string "processed_by"
-    t.string "species"
     t.string "access_token"
   end
 
