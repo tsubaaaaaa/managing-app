@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   #ユーザ回りのルート
   devise_for :users
+
+  resources :users, only: [:show]
  
 
   root 'infos#index' # 追記

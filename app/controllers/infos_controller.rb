@@ -5,6 +5,7 @@ class InfosController < ApplicationController
   before_action :validate_access_token, only: [:read_only]
   before_action :restrict_read_only_access, except: [:read_only]
 
+
   layout "read_only", only:[:read_only]
 
     def index
@@ -61,6 +62,7 @@ class InfosController < ApplicationController
 
     def new 
       @info = Info.new
+      @user = current_user
     end
 
     def create # 新規投稿を保存するためのアクション

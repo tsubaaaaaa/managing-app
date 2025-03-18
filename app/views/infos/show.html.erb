@@ -15,8 +15,8 @@
 <div class="info-container">
   <%# qrコードをクリックして新しいタブで開く %>
   
-  <div class="qrcode">
-    <%= image_tag qrcode(@info) %>
+  <div class="qrcode" >
+    <%= image_tag qrcode(@info), id: "qrcode" %>
   </div>
 
 
@@ -113,8 +113,14 @@
 
     <div class="button-container">
       <div class="edit-button">
-        <%= link_to "編集", edit_info_path(@info.id), class:"btn btn-blue" %>
+        <%= button_to "編集", edit_info_path(@info.id), method: :get, class:"btn btn-blue" %>
       </div>
+
+      <div class="download-button">
+        <button id="download-btn" class= "btn btn-grey">QR code</button>
+        <canvas id="canvas" style="display: none"></canvas>
+      </div>
+
     </div>
   </div>
 
@@ -131,6 +137,96 @@
 
 <script>
 
+
+</script>
+
+<script>
+  document.getElementById("download-btn").addEventListener("click", function() {
+    const newTab = window.open("", "_blank");
+    if(!newTab) {
+      alert("新しいタブを開けません");
+      return;
+    }
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const qrimage = document.getElementById("qrcode");
+    const species = "<%= j @info.species %>";
+
+
+    //canvasの大きさ
+    canvas.width = 400;
+    canvas.height = 600;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+    // テキストの設定
+    ctx.fillStyle = "black"; // 文字の色
+    ctx.font = "20px serif "; // フォント設定
+    ctx.textAlign = "center"; // 文字を中央揃え
+    ctx.fillText("個体識別情報", canvas.width / 2, 50); // 上部にタイトル
+    ctx.fillText("トレーサビリティシステム", canvas.width / 2, 80);
+    
+    ctx.fillStyle = "black";
+    ctx.font = "bold 25px serif";
+    ctx.textAlign = "center";
+    ctx.fillText(species, canvas.width / 2, 130); // 動物
+
+    //折り返しはどうする？
+    ctx.fillStyle = "black";
+    ctx.font = "20px serif";
+    ctx.textAlign = "center";
+    
+    //const text1 = "※お受け取り後は早急に内臓を摘出し 適切な処理をしてください。";
+    //drawWrappedText(ctx, text1. canvas.width/1.5, 400, 300, 25);
+    ctx.fillText("※お受け取り後は早急に内臓を摘出し", canvas.width / 2, 400);
+    ctx.fillText("適切な処理をしてください。", canvas.width / 2, 430)
+
+    const text2 = "※アニサキス対策として、必ず加熱 または冷凍してください。";
+    //drawWrappedText(ctx, text1. canvas.width/1.5, 400, 300, 25);
+    ctx.fillText("※アニサキス対策として、必ず加熱", canvas.width / 2, 480);
+    ctx.fillText(" または冷凍してください。", canvas.width / 2, 510)
+
+
+    //QRコードの描画
+    if(qrimage.complete) {
+      ctx.drawImage(qrimage, 110, 150, 200,200);
+      openImage(canvas, newTab);
+    } else {
+      qrimage.onload = function() {
+      ctx.drawImage(qrimage, 100, 150, 200,200);
+      openImage(canvas, newTab);
+      };
+    }
+
+  });
+
+  function openImage(canvas, newTab) {
+    const imgURL = canvas.toDataURL("image/png");
+    newTab.document.write("<img src='" + imgURL + "'>");
+    newTab.document.title = "QRコード";
+  }
+
+  //文字列折り返し
+  function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight){
+    const words = text.split(" ");
+    let line = "";
+
+    for (let i = 0; i < words.length; i++) {
+      let testLine = line + words[i];
+      let testWidth = ctx.measureText(testLine).width;
+
+      if (testWidth > maxWidth && line !== "") {
+        ctx.fillText(line, x, y);
+        line = words[i];
+        y += lineHeight; // 次の行へ
+      } else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, x, y);
+  }
 
 </script>
 

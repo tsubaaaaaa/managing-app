@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <!--%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %-->
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <meta http-equiv="content-language" content="ja">
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -21,8 +23,25 @@
           <div class=new_link><%= link_to "新規登録", infos_new_path %></ldiv>
         </ul>
         <ul>
-          <%# カメラを起動する %>
+          <div class=logout>
+            <% if user_signed_in? %>
+              <%= button_to "ログアウト", destroy_user_session_path, method: :delete%>
+            <% else %>
+              <%= link_to "ログイン", new_user_session_path %>
+            <% end %>
+          </div>
         </ul>
+        <ul>
+          <% if user_signed_in? %>
+            <div class=mypage>
+              <%= link_to "マイページ",
+                user_path(current_user.id),
+                method: :get
+               %>
+            </div>
+          <% end %>
+        </ul>
+
         
       </div>
     </header>
@@ -31,5 +50,6 @@
       <%= yield %>
     </main>
 
+    <%= javascript_importmap_tags %>
   </body>
 </html>
