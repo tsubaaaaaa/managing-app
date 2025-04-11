@@ -96,29 +96,3 @@
     border: none;
     color: #fff;
 }
-
-
-/* 入力フィールドのスタイル */
-.field {
-  margin-bottom: 15px;
-}
-
-/* 入力フィールドのスタイル */
-.field input[type="text"],
-.field input[type="email"],
-.field input[type="password"] {
-  width: 100%; /* 幅を親要素に合わせる */
-  max-width: 400px; /* 最大幅 */
-  padding: 10px; /* 内側の余白 */
-  border: 1px solid #8d8d8d; /* 枠線の色 */
-  border-radius: 5px; /* 角を丸く */
-  font-size: 18px; /* 文字サイズ */
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* フォーカス時のスタイル（枠線が消えないように） */
-.field input:focus {
-  border-color: #007bff; /* フォーカス時に青色の枠線 */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* ぼんやり光る効果 */
-  outline: none; /* デフォルトのアウトラインを消す */
-}
