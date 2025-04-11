@@ -8,7 +8,7 @@
 <% end %>
 <p>投稿数 : <%= @user.infos.count %></p>
 
-<%= link_to "logout", destroy_user_session_path, method: :delete %>
+<%= button_to "logout", destroy_user_session_path, method: :delete %>
 
 
 <h2>ユーザーの投稿一覧</h2>
