@@ -61,8 +61,8 @@ class InfosController < ApplicationController
     end
 
     def new 
-      @info = Info.new
       @user = current_user
+      @info = Info.new
     end
 
     def create # 新規投稿を保存するためのアクション
@@ -72,6 +72,8 @@ class InfosController < ApplicationController
       end
 
       @info = Info.new(info_params)
+      @info.user = current_user # 投稿者を現在のユーザーに設定
+
       if @info.save
         redirect_to action: "index", notice: '保存されました'
       else
@@ -122,7 +124,7 @@ class InfosController < ApplicationController
     def info_params
       params.require(:info).permit(:identifier,
        :hunter, :Hunteddate, 
-       :location, :method, 
+       :location, :method, :method_other,
        :species, :ages, 
        :weight, :butchering_date, 
        :processed_location, 

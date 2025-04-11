@@ -6,7 +6,6 @@
 <% if current_user.id == @user.id %>
   <%= link_to "編集する", edit_user_registration_path %>
 <% end %>
-<p>投稿数 : <%= @user.infos.count %></p>
 
 <%= button_to "logout", destroy_user_session_path, method: :delete %>
 

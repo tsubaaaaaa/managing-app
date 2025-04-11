@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_11_083215) do
   create_table "infos", force: :cascade do |t|
     t.text "number"
     t.datetime "created_at", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
     t.float "latitude"
     t.float "longitude"
     t.string "method"
+    t.string "species"
     t.string "ages"
     t.string "sex"
     t.string "weight"
@@ -29,8 +30,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
     t.string "processed_location"
     t.date "processed_date"
     t.string "processed_by"
-    t.string "species"
     t.string "access_token"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_infos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,4 +49,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_061629) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "infos", "users"
 end

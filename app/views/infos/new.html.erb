@@ -47,7 +47,7 @@
           <div class="label-box">捕獲者</div>
           <div class="field">
             <!--@user.nameを初期表示に設定-->
-            <%= f.text_field :hunter, size: 20, value: @user.name %>
+            <%= f.text_field :hunter, size: 20, value:@user&.name || "" %>
 
           </div>
         </div>
@@ -160,9 +160,20 @@
  
     <div class="button-container">
       <div class="submit-button">
-        <%= f.submit "新規登録", class:"btn btn-green" %>
+        <%= f.submit "保存", class:"btn btn-green" %>
       </div>
     </div>
+
+    <% if @info.errors.any? %>
+      <div class="error-messages">
+        <h3>入力エラーがあります:</h3>
+        <ul>
+          <% @info.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
   <% end %>
 </body>

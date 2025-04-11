@@ -1,6 +1,8 @@
 
 class Info < ApplicationRecord\
 
+    belongs_to :user  
+
     before_create :generate_access_token
 
     validates :identifier, 
