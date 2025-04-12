@@ -14,18 +14,17 @@
   </head>
 
   <body>
-    <header>
-      <div class=title_link>
-        <%= link_to "管理アプリ（仮）", root_path %>
-      </div>
+  <header>
+      <h1 class=title_link><%= link_to "HOME", root_path %></h1>
+      
       <div class="header-list">
         <ul>
-          <div class=new_link><%= link_to "新規登録", infos_new_path %></ldiv>
+          <!--div class=new_link><%= link_to "新規登録", infos_new_path %></div-->
         </ul>
         <ul>
           <div class=logout>
             <% if user_signed_in? %>
-              <%= button_to "ログアウト", destroy_user_session_path, method: :delete%>
+              <!--%= button_to "ログアウト", destroy_user_session_path, method: :delete%-->
             <% else %>
               <%= link_to "ログイン", new_user_session_path %>
             <% end %>
@@ -41,8 +40,6 @@
             </div>
           <% end %>
         </ul>
-
-        
       </div>
     </header>
 
