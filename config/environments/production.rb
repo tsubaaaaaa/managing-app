@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  Rails.application.config.hosts << "managing-app.onrender.com"
+  Rails.application.config.hosts << "managing-app-1gid.onrender.com"
 
   Rails.application.routes.default_url_options[:host] = "managing-app.onrender.com"
 
