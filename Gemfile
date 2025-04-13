@@ -49,8 +49,6 @@ gem "rqrcode"
 gem "rqrcode_png"
 gem "chunky_png"
 
-#CSV
-#gem "roo"
 
 
 #ページネーション
