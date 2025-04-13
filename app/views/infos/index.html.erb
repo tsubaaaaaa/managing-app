@@ -38,7 +38,7 @@
     
   </div>
 
-  <div class="detail-search-container">
+  <!--div class="detail-search-container">
     <div class="date-serach- container">
       <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
         <%= date_field_tag :start_date, params[:start_date] %>
@@ -46,7 +46,7 @@
         <%= submit_tag "日付検索" %>
       <% end %>
     </div>
-  </div>
+  </div-->
 
   <%# infos-cintainerをクリックしてinfoの詳細ページに遷移 %>
 
@@ -54,13 +54,13 @@
     <% @infos.each do |info| %>
       <div class="info" onclick="location.href='<%= info_path(info.id) %>'" 
       style = "cursor:pointer;">
-
-      <p><strong>識別番号:</strong> <%= info.identifier %></p>
-      <p><strong>捕獲者:</strong> <%= info.hunter %></p>
-      <p><strong>獲物:</strong> <%= info.species %></p>
-      <p><strong>捕獲日:</strong> <%= info.Hunteddate %></p>
-
-      <%#= link_to "詳細へ", info_path(info.id) %>
+        <div class="info-grid">
+          <p><strong>識別番号:</strong> <%= info.identifier %></p>
+          <p><strong>捕獲者:</strong> <%= info.hunter %></p>
+          <p><strong>獲物:</strong> <%= info.species %></p>
+          <p><strong>捕獲日:</strong> <%= info.Hunteddate %></p>
+        </div>
+        <%#= link_to "詳細へ", info_path(info.id) %>
       </div>
     <% end %>
   </div>

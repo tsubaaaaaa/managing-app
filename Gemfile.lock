@@ -231,6 +231,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.1)
+    roo (2.10.1)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
     rqrcode (2.2.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
@@ -300,6 +303,7 @@ DEPENDENCIES
   pg
   puma (>= 5.0)
   rails (~> 7.1.3)
+  roo
   rqrcode
   rqrcode_png
   selenium-webdriver
