@@ -1,7 +1,7 @@
 databases:
   - name: managingapp_db
-    databaseName: managingapp_db
-    user: managingapp_db_user
+    databaseName: managingapp_db_1n1x
+    user: managingapp_db_1n1x_user
     region: singapore
 
 services:
