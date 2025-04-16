@@ -50,8 +50,8 @@ class InfosController < ApplicationController
           "hunt_desc" => { Hunteddate: :desc },
           "processed_asc" => { processed_date: :asc },
           "processed_desc" => { processed_date: :desc },
-          "id_asc" => { id: :desc },
-          "id_desc" => { id: :asc }
+          "id_asc" => { id: :asc },
+          "id_desc" => { id: :desc }
         }
 
         if params[:sort].present? && sort_options.key?(params[:sort])
