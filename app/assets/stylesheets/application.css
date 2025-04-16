@@ -23,7 +23,7 @@
     font-size: 16px;
     background-color: #f9fafb;
     color: #333;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
   }
   header {
     background-color: #f9fafb;
@@ -126,4 +126,27 @@
 
 .newpost-btn:hover {
   background-color: #007bff;
+}
+
+
+/*ページネーション自体のデザイン*/
+.pagination {
+  justify-content: center;	/*中央寄せ*/
+}
+
+.pagination>li>a {			
+  border: none;		/*枠線をなくす*/
+  color: #374151;	/*文字の色を変える*/
+  background: #f9fafb;	/*背景の色を変える*/
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {		
+  background: #93c9ff;	   /*背景の色を変える*/
+  border-radius: 15px;	   /*角を丸くする*/
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {		
+  border-radius: 15px;	  /*角を丸くする*/
 }

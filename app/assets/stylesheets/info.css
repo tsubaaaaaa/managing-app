@@ -109,7 +109,7 @@
   .info p {
     margin: 1px 0;
     font-size: 1rem;
-    font-weight: 350;
+    font-weight: 400;
     color: #374151;
   }
 
@@ -117,6 +117,11 @@
     display: grid;
     gap: 5px;
     padding: 5px;
+  }
+
+  .material-icon-lg{
+    font-size: 1.5rem;
+    color: #374151;
   }
   
   .info:hover {
@@ -139,4 +144,12 @@
   line-height: 1;
   display: inline-flex;
   align-items: center;
+}
+
+
+/* ページネーションのスタイル */
+.pagination-container {
+  display: flex;
+  justify-content: center; /* 中央寄せ */
+  margin: 20px 0; /* 上下の余白 */
 }

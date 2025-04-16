@@ -1,9 +1,10 @@
 .title{
-    text-align: center;
-    font-size: 10px;
+    text-align: left;
+    font-size: 2rem;
     font-weight: bold;
     color: #374151;
     margin-top: 10px;
+    margin-left: 10%;
 }
 
 
@@ -11,7 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px; /* 行の間隔 */
-  padding: 10px;
+  padding: 0px;
 }
 
 .qrcode{
@@ -38,7 +39,7 @@
 
 .textbox {
   max-width: 35%;
-  min-height: 25px;
+  min-height: 55px;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px; /* 内部余白 */

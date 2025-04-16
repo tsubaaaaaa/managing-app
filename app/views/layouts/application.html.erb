@@ -20,15 +20,31 @@
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <!--script src="https://kit.fontawesome.com/5d2fcc1ba0.js" crossorigin="anonymous"></script-->
+
+    <!-- Bootstrap CSS読み込みコード-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- コード追加　Bootstrap JavaScript読み込みコード-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
   </head>
 
   <body>
   <header>
-      <h1 class=title_link><%= link_to "HOME", root_path %></h1>
+      <h1 class=title_link>
+        <%= link_to root_path, method: :get do %>
+          <span class="material-symbols-outlined"
+            style="font-size: 40px;">
+            home
+          </span>
+        <% end %>
+      </h1>
       
       <div class="header-list">
         <ul>
@@ -46,10 +62,12 @@
         <ul>
           <% if user_signed_in? %>
             <div class=mypage>
-              <%= link_to "マイページ",
-                user_path(current_user.id),
-                method: :get
-               %>
+              <%= link_to user_path(current_user.id),
+                method: :get do %>
+                <span class="material-symbols-outlined", style="font-size: 40px;">
+                  account_circle
+                </span>
+              <% end %>
             </div>
           <% end %>
         </ul>

@@ -9,7 +9,7 @@
 
 <body>
   <div class="header">
-    <p>捕獲情報一覧</p>
+    <h3>捕獲情報一覧</h3>
   </div>
 
   <div class="search-container">
@@ -81,26 +81,26 @@
       <div class="info" onclick="location.href='<%= info_path(info.id) %>'" 
       style = "cursor:pointer;">
         <div class="info-grid">
-          <p class="info-line">
-            <span class="material-symbols-outlined">
+          <p class="info-line" style="font-size: 1em;">
+            <span class="material-symbols-outlined material-icon-lg" style="font-size: 1em;">
             tag
             </span><%= info.identifier %>
           </p>
 
-          <p class="info-line">
-            <span class="material-symbols-outlined">
+          <p class="info-line" style="font-size: 1em;">
+            <span class="material-symbols-outlined" style="font-size: 1em;">
             person
             </span><%= info.hunter %>
           </p>
 
-          <p class="info-line">
-            <span class="material-symbols-outlined">
+          <p class="info-line" style="font-size: 1em;">
+            <span class="material-symbols-outlined" style="font-size: 1em;">
             pets
             </span> <%= info.species %>
           </p>
 
-          <p class="info-line">
-            <span class="material-symbols-outlined">
+          <p class="info-line" style="font-size: 1em;">
+            <span class="material-symbols-outlined" style="font-size: 1em;">
             calendar_today
             </span> <%= info.Hunteddate %>
         </div>
@@ -117,7 +117,8 @@
   </div>
 
   <%# ページネーション %>
-  <%= page_entries_info @infos %>
-  <%= paginate @infos %>
+  <div class="pagination-container">
+    <%= paginate @infos %>
+  </div>
 
 </body>
