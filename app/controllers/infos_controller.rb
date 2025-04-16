@@ -25,8 +25,11 @@ class InfosController < ApplicationController
           "CAST(identifier AS TEXT) LIKE ?
           OR hunter LIKE ?
           OR species LIKE ?
-          OR location LIKE ?",
-           search, search, search, search)
+          OR location LIKE ?
+          OR processed_location LIKE ?
+          OR processed_by LIKE ?",
+           search, search, search, 
+           search, search, search)
       end
 
       #日付絞込
@@ -35,11 +38,11 @@ class InfosController < ApplicationController
         end_date = Date.parse(params[:end_date]) rescue nil
 
         if start_date && end_date
-          @infos = @infos.where("Hunteddate BETWEEN ? AND ?", start_date, end_date)
+          @infos = @infos.where("infos.Hunteddate BETWEEN ? AND ?", start_date, end_date)
         elsif start_date
-          @infos = @infos.where("Hunteddate >= ?", start_date)
+          @infos = @infos.where("infos.Hunteddate >= ?", start_date)
         elsif end_date
-          @infos = @infos.where("Hunteddate <= ?", end_date)
+          @infos = @infos.where("infos.Hunteddate <= ?", end_date)
         end
 
       end
