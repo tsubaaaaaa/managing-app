@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html>
+
+<% if flash[:notice] %>
+  <div class="alert alert-success" id="flash-message">
+  <%= notice %>
+  </div>
+<% end %>
+
   <head>
     <title>個体詳細</title>
     <%= csrf_meta_tags %>
@@ -226,6 +233,15 @@
       }
     }
     ctx.fillText(line, x, y);
+  }
+
+  //フラッシュメッセージの自動消去
+  var flashMessage = document.getElementById("flash-message");
+
+  if (flashMessage) {
+    setTimeout(function() {
+      flashMessage.style.display = "none";
+    }, 2000); // 3秒後に非表示
   }
 
 </script>

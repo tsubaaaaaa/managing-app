@@ -4,7 +4,7 @@ require 'json'
 class InfosController < ApplicationController
   before_action :validate_access_token, only: [:read_only]
   before_action :restrict_read_only_access, except: [:read_only]
-  
+
 #reodonlyはユーザー認証をスルーするため、exceptを使用
 #これ大事
   before_action :authenticate_user!, except: [:read_only]
@@ -100,9 +100,11 @@ class InfosController < ApplicationController
     def update #投稿を編集して保存するためのアクション
       info = Info.find(params[:id])
       if info.update(info_params)
+        flash[:notice] = "更新されました"
         redirect_to :action => "show", :id => info.id
       else
-        redirect_to :action => "new"
+        flash[:alert] = "更新に失敗しました"
+        redirect_to :action => "show", :id => info.id
       end
     end
 
