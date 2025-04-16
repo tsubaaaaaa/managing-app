@@ -30,7 +30,8 @@
 .info-row {
   display: flex;
   justify-content: center;
-  gap: 30px; /* 項目間の間隔 */
+  padding: 20px, 5px;
+  gap: 0px; /* 項目間の間隔 */
 }
 
 .textbox {
@@ -53,7 +54,7 @@
   position: absolute;
   top: -12px;
   left: 5px;
-  background-color: #fff;
+  background-color: #f9fafb;
   color: #3333337a;
   font-size: small;
   font-weight: bold;
@@ -63,7 +64,7 @@
 }
 
 .btn-blue{
-  background-color: rgb(89, 0, 255);
+  background-color: #afdafd;
 }
 
 .btn-grey{

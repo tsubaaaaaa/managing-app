@@ -4,36 +4,62 @@
     <title>新規</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'info', media: 'all', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
 <body>
+  <div class="header">
+    <p>捕獲情報一覧</p>
+  </div>
+
   <div class="search-container">
-    <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
-      <%= text_field_tag :search, params[:search]%>
-      <%= submit_tag "検索" %>
-    <% end %>
 
-    <div class="sort-container">
+    <!-- 検索ボックス　上段 -->
+    <div class="search-box">
       <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
-        
-        <!--日付検索用の値を保持 -->
-        <%= hidden_field_tag :start_date, params[:start_date] %>
-        <%= hidden_field_tag :end_date, params[:end_date] %>
-
-        <%= select_tag :sort, options_for_select(
-          [
-            ["", ""],
-            ["捕獲日の古い順", "hunt_asc"],
-            ["捕獲日の新しい順", "hunt_desc"],
-            ["加工日の古い順", "processed_asc"], 
-            ["加工日の新しい順", "processed_desc"],
-            ["識別番号の昇順", "id_desc"],
-            ["識別番号の降順", "id_asc"]
-          ],
-          params[:sort]
-        ) %>
-        <%= submit_tag "並び替え" %>
+        <%= text_field_tag :search, params[:search], placeholder: "キーワード検索...", class: "search-input"%>
+        <!--%= submit_tag "検索" %-->
       <% end %>
+    </div>
+
+    <!-- 並び替えフォーム　下段 -->
+    <div class="other-search-box">
+
+      <div class="date-search">
+        <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
+          <%= date_field_tag :start_date, params[:start_date], onchange: "this.form.submit()" %>
+          <%= date_field_tag :end_date, params[:end_date], onchange: "this.form.submit()" %>
+          <!--%= submit_tag "日付検索" %-->
+        <% end %>
+      </div>
+      
+      <div class="sort">
+        <%= form_tag({controller: "infos", action: "index"}, {method: "get"}) do %>
+          
+          <!--日付検索用の値を保持 -->
+          <%= hidden_field_tag :start_date, params[:start_date] %>
+          <%= hidden_field_tag :end_date, params[:end_date] %>
+
+          <%= select_tag :sort, options_for_select(
+            [
+              ["", ""],
+              ["捕獲日の古い順", "hunt_asc"],
+              ["捕獲日の新しい順", "hunt_desc"],
+              ["加工日の古い順", "processed_asc"], 
+              ["加工日の新しい順", "processed_desc"],
+              ["識別番号の昇順", "id_desc"],
+              ["識別番号の降順", "id_asc"]
+            ],
+            params[:sort]
+          ) , 
+          {
+            class: "sort-select",
+            onchange: "this.form.submit()"
+          }%>
+
+          <!--%= submit_tag "並び替え" -->
+        <% end %>
+      </div>
     </div>
     
   </div>
@@ -55,10 +81,28 @@
       <div class="info" onclick="location.href='<%= info_path(info.id) %>'" 
       style = "cursor:pointer;">
         <div class="info-grid">
-          <p><strong>識別番号:</strong> <%= info.identifier %></p>
-          <p><strong>捕獲者:</strong> <%= info.hunter %></p>
-          <p><strong>獲物:</strong> <%= info.species %></p>
-          <p><strong>捕獲日:</strong> <%= info.Hunteddate %></p>
+          <p class="info-line">
+            <span class="material-symbols-outlined">
+            tag
+            </span><%= info.identifier %>
+          </p>
+
+          <p class="info-line">
+            <span class="material-symbols-outlined">
+            person
+            </span><%= info.hunter %>
+          </p>
+
+          <p class="info-line">
+            <span class="material-symbols-outlined">
+            pets
+            </span> <%= info.species %>
+          </p>
+
+          <p class="info-line">
+            <span class="material-symbols-outlined">
+            calendar_today
+            </span> <%= info.Hunteddate %>
         </div>
         <%#= link_to "詳細へ", info_path(info.id) %>
       </div>
