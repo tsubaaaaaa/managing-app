@@ -23,7 +23,7 @@
     font-size: 16px;
     background-color: #f9fafb;
     color: #333;
-    
+    padding-bottom: 20px;
   }
   header {
     background-color: #f9fafb;
@@ -113,8 +113,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #DCE0FF;
-  color: rgb(100, 100, 100);
+  background-color: #374151;
+  color: rgb(245, 245, 245);
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -125,5 +125,5 @@
 }
 
 .newpost-btn:hover {
-  background-color: #0056b3;
+  background-color: #007bff;
 }

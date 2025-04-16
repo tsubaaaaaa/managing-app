@@ -30,7 +30,8 @@
 .info-row {
   display: flex;
   justify-content: center;
-  gap: 30px; /* 項目間の間隔 */
+  padding: 20px, 5px;
+  gap: 0px; /* 項目間の間隔 */
 }
 
 .textbox {

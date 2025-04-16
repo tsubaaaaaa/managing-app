@@ -45,6 +45,7 @@
 }
   /*日付絞り*/
   .date-search {
+    flex-direction: row;
     width: 70%;
     background-color: #f9f9f9;
     border: 1px solid #cccc0000;
@@ -57,7 +58,7 @@
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 14px;
-    width: 40%; /* 日付フィールドの幅 */
+    width: 35%; /* 日付フィールドの幅 */
   }
 
   .date-search input[type="date"]:focus {
@@ -68,6 +69,7 @@
 
   /*ソート機能*/
   .sort{
+    margin-left: auto;
     width: 30%;
     background-color: #f9f9f9;
     border: 1px solid #cccc0000;
