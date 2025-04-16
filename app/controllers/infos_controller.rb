@@ -50,8 +50,8 @@ class InfosController < ApplicationController
           "hunt_desc" => { Hunteddate: :desc },
           "processed_asc" => { processed_date: :asc },
           "processed_desc" => { processed_date: :desc },
-          "id_asc" => { id: :asc },
-          "id_desc" => { id: :desc }
+          "id_asc" => { identifier: :asc },
+          "id_desc" => { identifier: :desc }
         }
 
         if params[:sort].present? && sort_options.key?(params[:sort])
@@ -59,7 +59,7 @@ class InfosController < ApplicationController
         end
 
       #ページネーション
-        @infos = @infos.page(params[:page]).per(10)
+        @infos = @infos.all.page(params[:page]).per(10)
 
     end
 
