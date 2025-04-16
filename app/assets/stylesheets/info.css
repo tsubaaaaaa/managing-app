@@ -1,49 +1,140 @@
+.header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #374151;
+  margin-left: 20px;
+}
+
+
 .search-container {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #f9f9f900;   
 }
-  
-.detail-search-container {
-    display: flex;
+
+.search-box, 
+.other-search-box {
+    
+    align-items: center;
     gap: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 100%;
 }
+
+.search-input {
+  padding: 10px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/*下段　日付とソート機能*/
+.other-search-box {
+  display: flex;
+  width: 100%;
+}
+  /*日付絞り*/
+  .date-search {
+    width: 70%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd00;
+    border-radius: 10px;
+  }
+
+    /* 日付フィールドのスタイル */
+  .date-search input[type="date"] {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    width: 40%; /* 日付フィールドの幅 */
+  }
+
+  .date-search input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  /*ソート機能*/
+  .sort{
+    width: 30%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd00;
+  }
+
+  .sort-select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .sort-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
 
 .infos-container {
     display: flex; 
     flex-direction: column;
     gap: 15px;
-    padding: 10px;
+    padding: 20px;
   }
   
   .info {
-    background-color: #e8e9fd;
+    background-color: #ffffff;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .info p {
-    margin: 5px 0;
+    margin: 1px 0;
+    font-size: 1rem;
+    font-weight: 350;
+    color: #374151;
   }
 
   .info-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 10px;
+    gap: 5px;
+    padding: 5px;
   }
   
   .info:hover {
-    background-color: #dcdffe;
+    background-color: #ffffff;
     transform: translateY(-2px);
     transition: all 0.2s ease;
   }
-  
+
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.info-line .material-symbols-outlined {
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}

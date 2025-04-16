@@ -4,7 +4,9 @@ require 'json'
 class InfosController < ApplicationController
   before_action :validate_access_token, only: [:read_only]
   before_action :restrict_read_only_access, except: [:read_only]
+  
 #reodonlyはユーザー認証をスルーするため、exceptを使用
+#これ大事
   before_action :authenticate_user!, except: [:read_only]
 
   layout "read_only", only:[:read_only]
