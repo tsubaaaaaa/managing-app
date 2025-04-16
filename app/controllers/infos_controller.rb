@@ -38,19 +38,19 @@ class InfosController < ApplicationController
         end_date = Date.parse(params[:end_date]) rescue nil
 
         if start_date && end_date
-          @infos = @infos.where("infos.Hunteddate BETWEEN ? AND ?", start_date, end_date)
+          @infos = @infos.where(hunted_date: start_date..end_date)
         elsif start_date
-          @infos = @infos.where("infos.Hunteddate >= ?", start_date)
+          @infos = @infos.where("hunted_date >= ?", start_date)
         elsif end_date
-          @infos = @infos.where("infos.Hunteddate <= ?", end_date)
-        end
+          @infos = @infos.where("hunted_date <= ?", end_date)
+        end        
 
       end
 
       #各種ソート
       sort_options = {
-          "hunt_asc" => { Hunteddate: :asc },
-          "hunt_desc" => { Hunteddate: :desc },
+          "hunt_asc" => { hunted_date: :asc },
+          "hunt_desc" => { hunted_date: :desc },
           "processed_asc" => { processed_date: :asc },
           "processed_desc" => { processed_date: :desc },
           "id_asc" => { identifier: :asc },

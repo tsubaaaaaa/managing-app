@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_11_083215) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_16_165716) do
   create_table "infos", force: :cascade do |t|
     t.text "number"
     t.datetime "created_at", null: false
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_11_083215) do
     t.string "identifier"
     t.string "hunter"
     t.string "location"
-    t.date "Hunteddate"
+    t.date "hunted_date"
     t.float "latitude"
     t.float "longitude"
     t.string "method"
