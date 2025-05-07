@@ -16,10 +16,11 @@
 }
 
 .qrcode{
-  margin: 0 auto;
+  margin: 0 :
+  padding:0:
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .info-title {
