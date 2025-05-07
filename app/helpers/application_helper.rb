@@ -21,7 +21,7 @@ module ApplicationHelper
         qr_url = "#{base_url}infos/read_only/#{info.id}?token=#{info.access_token}"
         
         qrcode = RQRCode::QRCode.new(qr_url)
-        qrcode.as_png(size: 200).to_data_url
+        qrcode.as_png(border_modules:0, size: 300).to_data_url
     end
       
 end
