@@ -100,6 +100,10 @@
   }
   
   .info {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #ffffff;
     padding: 10px;
     border: 1px solid #ddd;
@@ -145,6 +149,27 @@
   line-height: 1;
   display: inline-flex;
   align-items: center;
+}
+
+.info-btn-container {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 10px;
+  right: 10px;
+  border: #37415100 solid 1px;
+  z-index: 1000;
+}
+
+.edit-link-btn {
+  font-size: 2rem;
+  color: #374151;
+}
+
+.edit-link-btn:hover {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 

@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
  
-
   root 'infos#index' # 追記
 
   #新規投稿ページへのルーティング

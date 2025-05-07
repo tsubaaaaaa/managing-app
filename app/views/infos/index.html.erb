@@ -104,7 +104,16 @@
             calendar_today
             </span> <%= info.hunted_date %>
         </div>
-        <%#= link_to "詳細へ", info_path(info.id) %>
+
+        <div class="info-btn-container">
+            <%= link_to edit_info_path(info.id), 
+              class: "edit-link-btn" do%>
+                <span class="material-symbols-outlined" style="font-size: 1em;">
+                  edit_square
+                </span>
+            <%end %>
+        </div>
+
       </div>
     <% end %>
   </div>
